@@ -1,4 +1,5 @@
-TP1 et TP2 
+## TP1 et TP2 
+'''SQL
 DROP DATABASE IF EXISTS zoo;
 CREATE DATABASE zoo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE zoo
@@ -37,8 +38,9 @@ CONSTRAINT pk_id PRIMARY KEY (pers_id)
 INSERT INTO personne (pers_prenom,pers_nom,pers_age,pers_date,pers_etat,pers_status,pers_CV,pers_salaire) VALUES
 ("COUCOU","SALUT",32,20/10/2025,true,"membre","negioepogjepj",350000);
 SELECT * FROM personne
-
-TP3
+'''
+## TP3
+'''SQL
 DROP DATABASE IF EXISTS zoo;
 CREATE DATABASE zoo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE zoo;
@@ -119,8 +121,9 @@ IGNORE 1 LINES;                 -- Ignore la première ligne (en-tête du fichie
 POUR UPDATE ET DELETE :
 UPDATE chat SET age=21 WHERE id =1 ;
 DELETE FROM chat WHERE id = 3;
-
-TP4
+'''
+## TP4
+'''SQL
 DROP DATABASE IF EXISTS invitations;
 CREATE DATABASE invitations CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE invitations;
@@ -156,8 +159,9 @@ SELECT * FROM personne WHERE pers_prenom LIKE "%bra%";
 SELECT * FROM personne ORDER BY pers_age DESC;
 SELECT COUNT(pers_status) FROM personne WHERE pers_status = "membre" ;
 Select pers_status,COUNT(pers_id) FROM personne WHERE pers_status GROUP BY pers_status;
-
-TP5
+'''
+## TP5
+'''SQL
 DROP DATABASE IF EXISTS salade_de_fruits;
 CREATE DATABASE salade_de_fruits CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE salade_de_fruits;
@@ -216,8 +220,9 @@ SELECT AVG(Faste) FROM(
 Select COUNT(chats.id) AS Faste FROM chats 
 INNER JOIN couleurs ON chats.couleurs_id=couleurs.id
 GROUP BY couleurs.id)
-
-TP6
+'''
+## TP6
+'''SQL
 DROP DATABASE IF EXISTS Netflix;
 CREATE DATABASE Netflix CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE Netflix;
@@ -252,8 +257,9 @@ INSERT INTO film (nom,sortie,categ_id) VALUES
 
 SELECT film.nom,sortie,categ.nom FROM film 
 INNER JOIN categ ON film.categ_id=categ.id
-
-TP7
+'''
+## TP7
+'''SQL
 DROP DATABASE IF EXISTS clients;
 CREATE DATABASE clients CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE clients;
@@ -371,9 +377,9 @@ RIGHT JOIN projet ON devis.id_projet=projet.id
 RIGHT JOIN client ON projet.id_client=client.id
 WHERE facture.paiment IS NULL AND DATEDIFF(NOW(),facture.dates)>30
 GROUP BY facture.nom;
-
-TP8
-
+'''
+## TP8
+'''SQL
 DROP DATABASE IF EXISTS prime_vdo;
 CREATE DATABASE prime_vdo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE prime_vdo;
@@ -452,9 +458,10 @@ RIGHT JOIN film ON film_has_acteur.film_id=film.id
 RIGHT JOIN acteur ON film_has_acteur.acteur_id=acteur.id
 GROUP BY acteur.nom
 HAVING COUNT(film.id)=2
+'''
 
-
-TP9
+## TP9
+'''SQL
 DROP DATABASE IF EXISTS ecommerce;
 CREATE DATABASE ecommerce CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE ecommerce;
@@ -514,9 +521,9 @@ INNER JOIN article ON commande.id_article=article.id;
 SELECT SUM(commande.total) ,SUM(commande.total)*0.20,SUM(commande.total)*0.20+SUM(commande.total)  FROM commande
 INNER JOIN client ON commande.id_client=client.id
 INNER JOIN article ON commande.id_article=article.id
-
-TP9
-
+'''
+## TP10
+'''SQL
 DROP DATABASE IF EXISTS location_ski;
 CREATE DATABASE location_ski CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE location_ski;

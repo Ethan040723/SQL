@@ -1,5 +1,5 @@
 ## TP1 et TP2 
-'''SQL
+'''
 DROP DATABASE IF EXISTS zoo;
 CREATE DATABASE zoo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE zoo
@@ -40,7 +40,7 @@ INSERT INTO personne (pers_prenom,pers_nom,pers_age,pers_date,pers_etat,pers_sta
 SELECT * FROM personne
 '''
 ## TP3
-'''SQL
+'''
 DROP DATABASE IF EXISTS zoo;
 CREATE DATABASE zoo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE zoo;
@@ -123,7 +123,7 @@ UPDATE chat SET age=21 WHERE id =1 ;
 DELETE FROM chat WHERE id = 3;
 '''
 ## TP4
-'''SQL
+'''
 DROP DATABASE IF EXISTS invitations;
 CREATE DATABASE invitations CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE invitations;
@@ -161,7 +161,7 @@ SELECT COUNT(pers_status) FROM personne WHERE pers_status = "membre" ;
 Select pers_status,COUNT(pers_id) FROM personne WHERE pers_status GROUP BY pers_status;
 '''
 ## TP5
-'''SQL
+'''
 DROP DATABASE IF EXISTS salade_de_fruits;
 CREATE DATABASE salade_de_fruits CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE salade_de_fruits;
@@ -222,7 +222,7 @@ INNER JOIN couleurs ON chats.couleurs_id=couleurs.id
 GROUP BY couleurs.id)
 '''
 ## TP6
-'''SQL
+'''
 DROP DATABASE IF EXISTS Netflix;
 CREATE DATABASE Netflix CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE Netflix;
@@ -259,7 +259,7 @@ SELECT film.nom,sortie,categ.nom FROM film
 INNER JOIN categ ON film.categ_id=categ.id
 '''
 ## TP7
-'''SQL
+'''
 DROP DATABASE IF EXISTS clients;
 CREATE DATABASE clients CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE clients;
@@ -379,7 +379,7 @@ WHERE facture.paiment IS NULL AND DATEDIFF(NOW(),facture.dates)>30
 GROUP BY facture.nom;
 '''
 ## TP8
-'''SQL
+'''
 DROP DATABASE IF EXISTS prime_vdo;
 CREATE DATABASE prime_vdo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE prime_vdo;
@@ -461,7 +461,7 @@ HAVING COUNT(film.id)=2
 '''
 
 ## TP9
-'''SQL
+'''
 DROP DATABASE IF EXISTS ecommerce;
 CREATE DATABASE ecommerce CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE ecommerce;
@@ -523,7 +523,7 @@ INNER JOIN client ON commande.id_client=client.id
 INNER JOIN article ON commande.id_article=article.id
 '''
 ## TP10
-'''SQL
+'''
 DROP DATABASE IF EXISTS location_ski;
 CREATE DATABASE location_ski CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE location_ski;
@@ -762,3 +762,4 @@ JOIN grilleTarifs ON grilleTarifs.codeGam=gammes.codeGam
 JOIN tarifs ON tarifs.codeTarif=grilleTarifs.codeTarif
 WHERE fiches.noFic=1002 
 GROUP BY lignesFic.refart
+'''

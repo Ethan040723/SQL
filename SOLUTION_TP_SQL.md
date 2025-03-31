@@ -299,3 +299,34 @@ GROUP BY lignesFic.refart
 |1002|Desmoulin|Daniel|A03|"Salomon 24X+Z12"|2024-11-18|2024-11-22|10|50|200|
 |1002|Desmoulin|Daniel|A04|"Salomon 24X+Z12"|2024-11-19|2024-11-24|10|60|200|
 |1002|Desmoulin|Daniel|S03|"Décathlon Apparition"|2024-11-23|NULL|10|90|200|
+
+### 7)Grille des tarifs
+
+```sql
+SELECT categories.libelle,tarifs.libelle,gammes.libelle,tarifs.prixjour FROM tarifs 
+JOIN grilleTarifs ON grilleTarifs.codeTarif=tarifs.codeTarif
+JOIN gammes ON gammes.codeGam=grilleTarifs.codeGam
+JOIN categories ON categories.codeCate=grilletarifs.codeCate
+```
+|libelle|libelle|libelle|prixJour|  
+|---|---|---|---|
+|Ski de fond alternatif|Entrée de gamme|Base|10|
+|Ski de fond patineur|Entrée de gamme|Chocolat|15|
+|Monoski|Entrée de gamme|Base|10|
+|Patinette|Entrée de gamme|Base|10|
+|Ski alpin|Entrée de gamme|Base|10|
+|Surf|Entrée de gamme|Base|10|
+|Ski de fond alternatif|Haut de gamme|Argent|30|
+|Ski de fond patineur|Haut de gamme|Argent|30|
+|Ski alpin|Haut de gamme|Argent|30|
+|Surf|Haut de gamme|Bronze|20|
+|Ski de fond alternatif|Moyenne gamme|Chocolat|15|
+|Ski de fond patineur|Moyenne gamme|Bronze|20|
+|Monoski|Moyenne gamme|Chocolat|15|
+|Patinette|Moyenne gamme|Chocolat|15|
+|Ski alpin|Moyenne gamme|Chocolat|15|
+|Surf|Moyenne gamme|Chocolat|15|
+|Ski de fond alternatif|Matériel Professionnel|Platine|90|
+|Ski de fond patineur|Matériel Professionnel|Platine|90|
+|Ski alpin|Matériel Professionnel|Platine|90|
+|Surf|Matériel Professionnel|Or|50|

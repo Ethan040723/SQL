@@ -300,7 +300,7 @@ GROUP BY lignesFic.refart
 |1002|Desmoulin|Daniel|A04|"Salomon 24X+Z12"|2024-11-19|2024-11-24|10|60|200|
 |1002|Desmoulin|Daniel|S03|"Décathlon Apparition"|2024-11-23|NULL|10|90|200|
 
-### 7)Grille des tarifs
+### 7) Grille des tarifs ?
 
 ```sql
 SELECT categories.libelle,tarifs.libelle,gammes.libelle,tarifs.prixjour FROM tarifs 
@@ -330,3 +330,54 @@ JOIN categories ON categories.codeCate=grilletarifs.codeCate
 |Ski de fond patineur|Matériel Professionnel|Platine|90|
 |Ski alpin|Matériel Professionnel|Platine|90|
 |Surf|Matériel Professionnel|Or|50|
+
+### 8) Liste des locations de la catégorie SURF ?
+
+```sql
+SELECT articles.refart,articles.designation,COUNT(lignesFic.noFic)
+FROM articles
+JOIN lignesFic ON lignesFic.refart=articles.refart
+JOIN categories ON categories.codeCate=articles.codeCate
+where categories.libelle="surf"
+GROUP BY articles.refart
+```
+|refart|designation|nbLocation|
+|---|---|---|
+|S01|"Décathlon Apparition"|2|
+|S02|"Décathlon Apparition"|2|
+|S03|"Décathlon Apparition"|2|
+
+### 9) Calcul du nombre moyen d’articles loués par fiche de location ?
+) AS sous_requete;
+
+```sql
+SELECT 
+    AVG(nb_articles)
+FROM (
+    SELECT noFic,COUNT(refart) AS nb_articles
+    FROM lignesFic
+    GROUP BY noFic
+);
+```
+|nb_lignes_moyen_par_fiche|
+|---|
+|2.375000|
+
+### 10) Calcul du nombre de fiches de location établies pour les catégories de location Ski alpin, Surf et Patinette ?
+
+```sql
+SELECT categories.libelle,COUNT(lignesFic.noFic)
+FROM categories
+JOIN articles ON categories.codeCate=articles.codeCate
+JOIN lignesFic ON lignesFic.refart=articles.refart
+where categories.libelle IN ("ski alpin","surf","Patinette")
+GROUP BY categories.libelle
+```
+
+|catégorie|nombre de location|
+|---|---|
+|Ski alpin|2|
+|Patinette|1|
+|Surf|6|
+
+

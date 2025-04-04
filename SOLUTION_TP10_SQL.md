@@ -381,3 +381,25 @@ GROUP BY categories.libelle
 |Surf|6|
 
 
+### 11) Calcul du montant moyen des fiches de location
+```sql
+SELECT 
+    AVG(montant_total) AS montant_moyen_par_fiche
+FROM (
+    SELECT 
+        fiches.noFic,
+        SUM(
+            (IFNULL(DATEDIFF(IFNULL(lignesFic.retour, NOW()), lignesFic.depart), 0) + 1) * tarifs.prixjour
+        ) AS montant_total
+    FROM fiches
+    INNER JOIN lignesFic ON fiches.noFic = lignesFic.noFic
+    INNER JOIN articles ON lignesFic.refart = articles.refart
+    INNER JOIN grilleTarifs ON articles.codeGam = grilleTarifs.codeGam AND articles.codeCate = grilleTarifs.codeCate
+    INNER JOIN tarifs ON grilleTarifs.codeTarif = tarifs.codeTarif
+    GROUP BY fiches.noFic
+) AS sous_requete;
+```
+|montant moyen d'une fiche de location|
+|---|
+|131.8750|
+

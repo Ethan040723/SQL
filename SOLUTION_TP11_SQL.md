@@ -322,4 +322,40 @@ JOIN tarifs ON tarifs.codeTarif=grilleTarifs.codeTarif;
 |---|
 |5455|
 
-### 5) Calcul du nombre d’articles actuellement en cours de location.
+### 5) Calcul du nombre d’articles actuellement en cours de location
+```sql
+SELECT Count(articles.refart)
+FROM fiches
+JOIN clients ON clients.noCLI=fiches.noCLI
+JOIN lignesFic ON lignesFic.noFic=fiches.noFic
+JOIN articles ON articles.refart=lignesFic.refart
+JOIN gammes ON gammes.codeGam=articles.codeGam
+JOIN grilleTarifs ON grilleTarifs.codeGam=gammes.codeGam
+JOIN tarifs ON tarifs.codeTarif=grilleTarifs.codeTarif
+where lignesFic.retour IS NULL
+```
+|nombre d'articles encore en cours|
+|---|
+|40|
+
+### 6) Calcul du nombre d’articles loués, par client
+```sql
+SELECT clients.prenom,clients.nom,Count(articles.refart)
+FROM fiches
+JOIN clients ON clients.noCLI=fiches.noCLI
+JOIN lignesFic ON lignesFic.noFic=fiches.noFic
+JOIN articles ON articles.refart=lignesFic.refart
+JOIN gammes ON gammes.codeGam=articles.codeGam
+JOIN grilleTarifs ON grilleTarifs.codeGam=gammes.codeGam
+JOIN tarifs ON tarifs.codeTarif=grilleTarifs.codeTarif
+Group BY clients.nom
+```
+|prenom|nom|nombre articles par personne|
+|---|---|---|
+|Anatole|Albert|30|
+|Barnabé|Bernard|6|
+|Camille|Dupond|30|
+|Daniel|Desmoulin|18|
+|Francois|Ferdinand|6|
+|Sabine|Boutaud|14|
+

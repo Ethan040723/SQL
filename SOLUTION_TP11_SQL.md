@@ -264,3 +264,62 @@ INNER JOIN categories On categories.codeCate=articles.codeCate
 WHERE  categories.libelle LIKE "%Ski%"
 Group BY  articles.refart
 ```
+refart	designation	libelle
+|F01|	Fischer Cruiser|	Ski de fond alternatif|
+|F02|	Fischer Cruiser|	Ski de fond alternatif|
+|F03|	Fischer Cruiser|	Ski de fond alternatif|
+|F04| Fischer Cruiser|	Ski de fond alternatif|
+|F05| Fischer Cruiser|	Ski de fond alternatif|
+|F10|	Fischer Sporty Crown|	Ski de fond alternatif|
+|F20|	Fischer RCS Classic GOLD|	Ski de fond alternatif|
+|F21|	Fischer RCS Classic GOLD|	Ski de fond alternatif|
+|F22|	Fischer RCS Classic GOLD|	Ski de fond alternatif|
+|F23|	Fischer RCS Classic GOLD|	Ski de fond alternatif|
+|F50|	Fischer SOSSkating VASA|	Ski de fond patineur|
+|F60|	Fischer RCS CARBOLITE Skating|	Ski de fond patineur|
+|F61|	Fischer RCS CARBOLITE Skating|	Ski de fond patineur|
+|F62|	Fischer RCS CARBOLITE Skating|	Ski de fond patineur|
+|F63|	Fischer RCS CARBOLITE Skating|	Ski de fond patineur|
+|F64|	Fischer RCS CARBOLITE Skating|	Ski de fond patineur|
+|A01|	Salomon 24X+Z12|	Ski alpin|
+|A02|	Salomon 24X+Z12|	Ski alpin|
+|A03|	Salomon 24X+Z12|	Ski alpin|
+|A04|	Salomon 24X+Z12|	Ski alpin|
+|A05|	Salomon 24X+Z12|	Ski alpin|
+|A10|	Salomon Pro Link Equipe 4S|	Ski alpin|
+|A11|	Salomon Pro Link Equipe 4S|	Ski alpin|
+|A21|	Salomon 3V RACE JR+L10|	Ski alpin|
+
+### 4)  Calcul du montant de chaque fiche soldée et du montant total des fiches.
+
+Pour les fiches soldée:
+```sql
+SELECT SUM(DATEDIFF(IFNULL(lignesFic.retour, NOW()), lignesFic.depart) * tarifs.prixJour+tarifs.prixJour) 
+FROM fiches
+JOIN clients ON clients.noCLI=fiches.noCLI
+JOIN lignesFic ON lignesFic.noFic=fiches.noFic
+JOIN articles ON articles.refart=lignesFic.refart
+JOIN gammes ON gammes.codeGam=articles.codeGam
+JOIN grilleTarifs ON grilleTarifs.codeGam=gammes.codeGam
+JOIN tarifs ON tarifs.codeTarif=grilleTarifs.codeTarif
+Where fiches.etat="SO";
+```
+|montant fiches soldées|
+|---|
+|1260|
+Pour le total des fiches 
+```sql
+SELECT SUM(DATEDIFF(IFNULL(lignesFic.retour, NOW()), lignesFic.depart) * tarifs.prixJour+tarifs.prixJour) 
+FROM fiches
+JOIN clients ON clients.noCLI=fiches.noCLI
+JOIN lignesFic ON lignesFic.noFic=fiches.noFic
+JOIN articles ON articles.refart=lignesFic.refart
+JOIN gammes ON gammes.codeGam=articles.codeGam
+JOIN grilleTarifs ON grilleTarifs.codeGam=gammes.codeGam
+JOIN tarifs ON tarifs.codeTarif=grilleTarifs.codeTarif;
+```
+|montant total des fiches|
+|---|
+|5455|
+
+### 5) Calcul du nombre d’articles actuellement en cours de location.
